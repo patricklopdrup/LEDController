@@ -7,6 +7,49 @@
         mc:Ignorable="d"
         Title="LED Controller" Height="600" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical">
+            <TextBox Height="30" FontSize="20"/>
+
+            <!--Red-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="R:" FontSize="20" Margin="10"/>
+                <Slider Width="200" Height="20" Margin="10" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="RSlider"/>
+                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=RSlider, Path=Value}" />
+            </StackPanel>
+
+            <!--Green-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="G:" FontSize="20" Margin="10"/>
+                <Slider Width="200" Height="20" Margin="10" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="GSlider"/>
+                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=GSlider, Path=Value}" />
+            </StackPanel>
+
+            <!--Blue-->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="R:" FontSize="20" Margin="10"/>
+                <Slider Width="200" Height="20" Margin="10" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="BSlider"/>
+                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=BSlider, Path=Value}" />
+            </StackPanel>
+
+        </StackPanel>
         
+
     </Grid>
+
+
 </Window>
