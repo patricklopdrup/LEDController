@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LEDControllerWPF"
         mc:Ignorable="d"
         Title="LED Controller" Height="600" Width="800">
-    <Grid>
+    <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="2*" />
@@ -23,31 +23,51 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical">
-            <TextBox Height="30" FontSize="20"/>
+            <TextBox Height="30" FontSize="20" Margin="5"/>
 
             <!--Red-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="R:" FontSize="20" Margin="10"/>
-                <Slider Width="200" Height="20" Margin="10" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="RSlider"/>
-                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=RSlider, Path=Value}" />
+                <Slider Width="200" Height="20" Margin="10" IsMoveToPointEnabled="True" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="RSlider"/>
+                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=RSlider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
 
             <!--Green-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="G:" FontSize="20" Margin="10"/>
-                <Slider Width="200" Height="20" Margin="10" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="GSlider"/>
-                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=GSlider, Path=Value}" />
+                <Slider Width="200" Height="20" Margin="10" IsMoveToPointEnabled="True" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="GSlider"/>
+                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=GSlider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
 
             <!--Blue-->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="R:" FontSize="20" Margin="10"/>
-                <Slider Width="200" Height="20" Margin="10" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="BSlider"/>
-                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=BSlider, Path=Value}" />
+                <TextBlock Text="B:" FontSize="20" Margin="10"/>
+                <Slider Width="200" Height="20" Margin="10" IsMoveToPointEnabled="True" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="BSlider"/>
+                <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=BSlider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-
         </StackPanel>
-        
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="30" x:Name="Gd">
+            <Border BorderThickness="2" BorderBrush="Black" Margin="-3">
+                <Canvas x:Name="ColorPalette" 
+                        Width="{Binding ElementName=Gd, Path=ActualWidth}" Height="{Binding ElementName=Gd, Path=ActualHeight}">
+
+                </Canvas>
+            </Border>
+        </Grid>
+
+
+
+
+            <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Hej"/>
+                <DataGridTextColumn Header="Hej"/>
+                <DataGridTextColumn Header="Hej"/>
+                <DataGridTextColumn Header="Hej"/>
+                <DataGridTextColumn Header="Hej"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 

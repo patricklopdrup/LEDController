@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace LEDControllerWPF
 {
     /// <summary>
@@ -23,6 +24,15 @@ namespace LEDControllerWPF
         public MainWindow()
         {
             InitializeComponent();
+
+            
         }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            MyColor color = new MyColor(ColorPalette);
+        }
+
+        
     }
 }
