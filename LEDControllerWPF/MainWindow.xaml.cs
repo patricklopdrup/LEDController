@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +22,11 @@ namespace LEDControllerWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
-
-            
+            CSGOHandling csgoHandling = new CSGOHandling();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -33,6 +34,10 @@ namespace LEDControllerWPF
             MyColor color = new MyColor(ColorPalette);
         }
 
-        
+        private void ColorPalette_MouseMove(object sender, MouseEventArgs e)
+        {
+            
+        }
+
     }
 }

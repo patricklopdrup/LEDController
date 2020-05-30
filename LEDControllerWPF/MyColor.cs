@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace LEDControllerWPF
@@ -37,6 +38,8 @@ namespace LEDControllerWPF
             double phaseLen = canvas.Width / phases;
             // cannot show every color so we jump according to the offset
             byte offset = (byte) (maxColor / phaseLen);
+            //double hej = (maxColor / phaseLen);
+            //Console.WriteLine($"hello: {offset} - real: {hej}");
 
             // x-axis for colors in the canvas
             switch (GetPhase(lineNum))
@@ -114,6 +117,12 @@ namespace LEDControllerWPF
 
             // adding the line to the canvas
             canvas.Children.Add(line);
+        }
+
+        public void GetBitmap()
+        {
+            BitmapSource bitmap = new BitmapImage();
+
         }
     }
 }

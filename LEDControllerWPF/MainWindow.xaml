@@ -9,7 +9,7 @@
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2.75*" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="20" />
@@ -47,10 +47,10 @@
             </StackPanel>
         </StackPanel>
 
-        <Grid Grid.Column="1" Grid.Row="1" Margin="30" x:Name="Gd">
+        <Grid Grid.Column="1" Grid.Row="1" Margin="25" x:Name="Gd">
             <Border BorderThickness="2" BorderBrush="Black" Margin="-3">
                 <Canvas x:Name="ColorPalette" 
-                        Width="{Binding ElementName=Gd, Path=ActualWidth}" Height="{Binding ElementName=Gd, Path=ActualHeight}">
+                        Width="{Binding ElementName=Gd, Path=ActualWidth}" Height="{Binding ElementName=Gd, Path=ActualHeight}" MouseMove="ColorPalette_MouseMove">
 
                 </Canvas>
             </Border>
