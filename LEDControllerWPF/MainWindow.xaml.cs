@@ -26,7 +26,7 @@ namespace LEDControllerWPF
         public MainWindow()
         {
             InitializeComponent();
-            CSGOHandling csgoHandling = new CSGOHandling();
+            CsgoHandling csgoHandling = new CsgoHandling();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
