@@ -89,7 +89,7 @@ namespace LEDControllerWPF
         {
             CalcRGBValues(lineNum);
 
-            Console.WriteLine($"R:{_r} G:{_g} B:{_b}");
+            //Console.WriteLine($"R:{_r} G:{_g} B:{_b}");
 
             Color colorLine = new Color();
             colorLine = Color.FromRgb(_r,_g,_b);

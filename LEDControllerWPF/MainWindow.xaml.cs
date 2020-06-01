@@ -27,6 +27,8 @@ namespace LEDControllerWPF
         {
             InitializeComponent();
             CsgoHandling csgoHandling = new CsgoHandling();
+            DataPort dataPort = new DataPort();
+            dataPort.SendData();
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
