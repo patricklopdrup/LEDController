@@ -17,9 +17,8 @@ namespace LEDControllerWPF
 
         public DataPort()
         {
+            // init port
             port = new SerialPort(_portName, _baudRate);
-            
-
         }
 
         public void SendData()
@@ -44,7 +43,6 @@ namespace LEDControllerWPF
                     }
                     port.WriteLine(hej);
                 }
-                
             }
             catch (UnauthorizedAccessException e)
             {

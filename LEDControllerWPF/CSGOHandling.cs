@@ -16,29 +16,39 @@ namespace LEDControllerWPF
         private GameStateListener _gsl;
         private ProcessListener _processListener;
         private CsgoGameState _gameState = new CsgoGameState();
-        private string _csgoFileName = "csgo";
         private bool _firstTimeStarted = false;
+
+        // all the game titles we want to look at. Creating List in constructor
+        private string[] gameTitles = {"calculator", "notepad" };
+        private List<ProcessRunningResult> games;
+
 
         public CsgoHandling()
         {
-            _processListener = new ProcessListener(_csgoFileName);
+            games = new List<ProcessRunningResult>();
+            // creating ProcessRunningResults of all the gametitles
+            foreach (var gameTitle in gameTitles)
+            {
+                games.Add(new ProcessRunningResult(gameTitle));
+            }
+            _processListener = new ProcessListener(games);
+
             // subscribe to methods in ProcessListener
             _processListener.ProgramRunning += OnProgramRunning;
             _processListener.ProgramShutdown += OnProgramShutdown;
-
         }
 
         // when the program is started
-        public void OnProgramRunning(object sender, EventArgs e)
+        public void OnProgramRunning(object sender, ProcessEventArgs e)
         {
-            Console.WriteLine("Program startet");
+            Console.WriteLine($"Program startet: {e.processName}");
             StartCsgoListening();
         }
 
         // when the program is shutdown again
-        public void OnProgramShutdown(object sender, EventArgs e)
+        public void OnProgramShutdown(object sender, ProcessEventArgs e)
         {
-            Console.WriteLine("Program stoppet");
+            Console.WriteLine($"Program stoppet: {e.processName}");
         }
 
 
