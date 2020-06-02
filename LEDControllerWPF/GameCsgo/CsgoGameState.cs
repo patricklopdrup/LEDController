@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CSGSI;
 using CSGSI.Nodes;
 
-namespace LEDControllerWPF
+namespace LEDControllerWPF.GameCsgo
 {
     class CsgoGameState
     {
@@ -24,6 +20,16 @@ namespace LEDControllerWPF
             Console.WriteLine($"Health: {gs.Player.State.Health}");
             Console.WriteLine($"Money: {gs.Player.State.Money}");
             Console.WriteLine($"Ammo: {gs.Player.Weapons.ActiveWeapon.AmmoClip}");
+        }
+
+        public void Startup()
+        {
+            // run startup animation
+        }
+
+        public void ShutDown()
+        {
+            // run shutdown animation
         }
 
         private void BombPlant(GameState gs)

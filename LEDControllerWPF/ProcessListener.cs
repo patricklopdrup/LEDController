@@ -16,12 +16,12 @@ namespace LEDControllerWPF
     }
 
     // we need the name and the running status of a given program
-    class ProcessRunningResult
+    class ProcessObject
     {
         public string Name { get; set; }
         public bool IsRunning { get; set; }
 
-        public ProcessRunningResult(string name)
+        public ProcessObject(string name)
         {
             Name = name;
             IsRunning = false;
@@ -40,12 +40,12 @@ namespace LEDControllerWPF
         public event EventHandler<ProcessEventArgs> ProgramShutdown;
 
         private DispatcherTimer _timer;
-        private List<ProcessRunningResult> _games;
+        private List<ProcessObject> _games;
 
         // we only look at one program at a time
         private bool _allreadyRunning = false;
 
-        public ProcessListener(List<ProcessRunningResult> games)
+        public ProcessListener(List<ProcessObject> games)
         {
             _games = games;
             SetTimer();
@@ -71,7 +71,7 @@ namespace LEDControllerWPF
         }
 
         // allow only one program to send OnProgramRunning at a time with _allreadyRunning bool
-        public void CheckProgramRunning(ProcessRunningResult game)
+        public void CheckProgramRunning(ProcessObject game)
         {
             // Program starting
             if (!_allreadyRunning && !game.IsRunning && IsProgramRunning(game.Name))
@@ -93,14 +93,14 @@ namespace LEDControllerWPF
         }
 
         // is called when the program is starting up
-        protected virtual void OnProgramRunning(ProcessRunningResult game)
+        protected virtual void OnProgramRunning(ProcessObject game)
         {
             if (ProgramRunning != null)
                 ProgramRunning(this, new ProcessEventArgs() {processName = game.Name});
         }
 
         // is called when the program stops again
-        protected virtual void OnProgramShutdown(ProcessRunningResult game)
+        protected virtual void OnProgramShutdown(ProcessObject game)
         {
             ProgramShutdown?.Invoke(this, new ProcessEventArgs() {processName = game.Name});
         }

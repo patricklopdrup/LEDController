@@ -26,7 +26,7 @@ namespace LEDControllerWPF
         public MainWindow()
         {
             InitializeComponent();
-            CsgoHandling csgoHandling = new CsgoHandling();
+            GameHandling gameHandling = new GameHandling();
 
             //DataPort dataPort = new DataPort();
             //dataPort.SendData();

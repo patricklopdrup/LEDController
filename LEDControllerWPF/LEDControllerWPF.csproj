@@ -97,9 +97,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CsgoGameState.cs" />
-    <Compile Include="CsgoHandling.cs" />
+    <Compile Include="GameCsgo\CsgoGameState.cs" />
+    <Compile Include="GameHandling.cs" />
     <Compile Include="DataPort.cs" />
+    <Compile Include="GameCsgo\CsgoHandling.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
