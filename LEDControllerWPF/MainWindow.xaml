@@ -8,18 +8,20 @@
         Title="LED Controller" Height="600" Width="800">
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="2.75*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="2.7*" />
             <ColumnDefinition Width="10" />
             <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="10" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="10" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="20" />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Vertical">
@@ -47,19 +49,20 @@
             </StackPanel>
         </StackPanel>
 
+        <!--Color palette-->
         <Grid Grid.Column="1" Grid.Row="1" Margin="25" x:Name="Gd">
             <Border BorderThickness="2" BorderBrush="Black" Margin="-3">
                 <Canvas x:Name="ColorPalette" 
                         Width="{Binding ElementName=Gd, Path=ActualWidth}" Height="{Binding ElementName=Gd, Path=ActualHeight}" MouseMove="ColorPalette_MouseMove">
-
                 </Canvas>
             </Border>
         </Grid>
 
+        <Button Grid.Column="3" Grid.Row="3" Name="SettingsButton"
+                Content="Settings" Grid.ColumnSpan="3" Height="48" Margin="295,0,19.556,19.889" Grid.RowSpan="3" VerticalAlignment="Bottom" Click="SettingsButton_Click" RenderTransformOrigin="0.501,0.5"/>
 
 
-
-            <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+        <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Hej"/>
                 <DataGridTextColumn Header="Hej"/>
