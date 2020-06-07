@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LEDControllerWPF"
         mc:Ignorable="d"
+        Icon="./Img/256.ico"
         Title="LED Controller" Height="600" Width="800">
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
@@ -62,15 +63,12 @@
                 Content="Settings" Grid.ColumnSpan="3" Height="48" Margin="295,0,19.556,19.889" Grid.RowSpan="3" VerticalAlignment="Bottom" Click="SettingsButton_Click" RenderTransformOrigin="0.501,0.5"/>
 
 
-        <DataGrid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Center">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Hej"/>
-                <DataGridTextColumn Header="Hej"/>
-                <DataGridTextColumn Header="Hej"/>
-                <DataGridTextColumn Header="Hej"/>
-                <DataGridTextColumn Header="Hej"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4">
+            <!--LEDs-->
+            <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" 
+                        x:Name="LedStackPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="LedStackPanel_PreviewMouseDown">
+            </StackPanel>
+        </Border>
 
     </Grid>
 

@@ -26,15 +26,22 @@ namespace LEDControllerWPF
     {
         private DataPort dataPort;
         private GameHandling gameHandling;
+        private LedSelector ledSelector;
         private bool _isUsedBefore = false;
+
+        
 
         public MainWindow()
         {
             InitializeComponent();
+            /*ShowInTaskbar = true;
+            WindowState = System.Windows.WindowState.Minimized;*/
+
             gameHandling = new GameHandling();
 
             dataPort = new DataPort();
-            //dataPort.SendData();
+            
+            ledSelector = new LedSelector(LedStackPanel);
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -58,6 +65,16 @@ namespace LEDControllerWPF
             Console.WriteLine("selected er: " + dataPort.SelectedPort);
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.Show();
+        }
+
+        private void LedStackPanel_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var mouseWasDownOn = e.Source as FrameworkElement;
+            if (mouseWasDownOn != null)
+            {
+                string elementName = mouseWasDownOn.Name;
+                Console.WriteLine(elementName);
+            }
         }
     }
 }

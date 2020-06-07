@@ -28,14 +28,17 @@ namespace LEDControllerWPF
         // UI binding to AvailablePorts.
         public string[] AvailablePorts
         {
-            //get => SerialPort.GetPortNames();
-            get => hej;
+            get => SerialPort.GetPortNames();
+            //get => hej;
         }
 
         public DataPort()
         {
-            // init _port
-            _port = new SerialPort(_selectedPort, _baudRate);
+            if (_port != null)
+            {
+                // init _port
+                _port = new SerialPort(_selectedPort, _baudRate);
+            }
         }
 
         public void SendData()
@@ -67,9 +70,10 @@ namespace LEDControllerWPF
             }
         }
 
+        // create a string the Arduino can work with and send over COM port
         public void SendData(string category, byte red, byte green, byte blue, int duration = -1)
         {
-            // startup:R20G100B250:1500
+            // example: startup:R20G100B250T1500
             StringBuilder sb = new StringBuilder();
             string delimiter = ":";
             sb.Append(category);
@@ -77,10 +81,28 @@ namespace LEDControllerWPF
             sb.Append("R" + red);
             sb.Append("G" + green);
             sb.Append("B" + blue);
-            sb.Append(delimiter);
-            sb.Append(duration);
+            sb.Append("T" + duration);
 
-            _port.WriteLine(sb.ToString());
+            SendData(sb.ToString());
+        }
+
+        // write the string to the port
+        public void SendData(string command)
+        {
+            try
+            {
+                // opens the port if it is closed
+                if (!_port.IsOpen)
+                {
+                    _port.Open();
+                }
+                // write to the port
+                _port.WriteLine(command);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
     }
