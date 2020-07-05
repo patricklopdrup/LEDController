@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LEDControllerWPF"
         mc:Ignorable="d"
         Icon="./Img/256.ico"
-        Title="LED Controller" Height="600" Width="800">
+        Title="LED Controller" Height="800" Width="1080" Loaded="Window_Loaded">
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
@@ -52,9 +52,15 @@
 
         <!--Color palette-->
         <Grid Grid.Column="1" Grid.Row="1" Margin="25" x:Name="Gd">
-            <Border BorderThickness="2" BorderBrush="Black" Margin="-3">
-                <Canvas x:Name="ColorPalette" 
-                        Width="{Binding ElementName=Gd, Path=ActualWidth}" Height="{Binding ElementName=Gd, Path=ActualHeight}" MouseMove="ColorPalette_MouseMove">
+            <Border BorderThickness="2" 
+                    Width="514" Height="404" 
+                    VerticalAlignment="Top" HorizontalAlignment="Center" 
+                    BorderBrush="Black" 
+                    x:Name="colorBorder"
+                    Margin="-10">
+                <!--width 510 makes the offset exactly 3-->
+                <Canvas x:Name="ColorPalette" Width="510" MaxWidth="510" MinWidth="510"
+                         Height="400">
                 </Canvas>
             </Border>
         </Grid>
@@ -63,11 +69,19 @@
                 Content="Settings" Grid.ColumnSpan="3" Height="48" Margin="295,0,19.556,19.889" Grid.RowSpan="3" VerticalAlignment="Bottom" Click="SettingsButton_Click" RenderTransformOrigin="0.501,0.5"/>
 
 
-        <Border BorderThickness="2" BorderBrush="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4">
-            <!--LEDs-->
-            <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" 
-                        x:Name="LedStackPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="LedStackPanel_PreviewMouseDown">
-            </StackPanel>
+        <Border ClipToBounds="True" BorderThickness="2" BorderBrush="Black" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" x:Name="ledBorder">
+            <Canvas Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" 
+                    x:Name="ledCanvas" ClipToBounds="True" 
+                    MouseMove="LedCanvas_OnMouseMove" 
+                    MouseUp="LedCanvas_OnMouseUp" 
+                    Background="Transparent" 
+                    MouseLeftButtonDown="LedCanvas_OnMouseLeftDown">
+                <Grid Width="{Binding ActualWidth, ElementName=ledCanvas}"
+                      Height="{Binding ActualHeight, ElementName=ledCanvas}">
+                    <!--LEDs-->
+                    <StackPanel x:Name="LedStackPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" PreviewMouseDown="LedStackPanel_PreviewMouseDown"/>
+                </Grid>
+            </Canvas>
         </Border>
 
     </Grid>

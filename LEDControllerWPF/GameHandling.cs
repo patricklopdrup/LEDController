@@ -28,7 +28,6 @@ namespace LEDControllerWPF
 
         public GameHandling()
         {
-            
             games = new List<ProcessObject>();
             // creating ProcessObject of all the gametitles
             foreach (var gameTitle in Enum.GetNames(typeof(gameTitles)))

@@ -35,7 +35,7 @@ namespace LEDControllerWPF
 
     class ProcessListener
     {
-        // events for csgoHandler class to subscribe to
+        // events for GameHandler class to subscribe to
         public event EventHandler<ProcessEventArgs> ProgramRunning;
         public event EventHandler<ProcessEventArgs> ProgramShutdown;
 

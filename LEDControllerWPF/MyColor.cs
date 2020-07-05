@@ -38,8 +38,13 @@ namespace LEDControllerWPF
             double phaseLen = canvas.Width / phases;
             // cannot show every color so we jump according to the offset
             byte offset = (byte) (maxColor / phaseLen);
-            //double hej = (maxColor / phaseLen);
-            //Console.WriteLine($"hello: {offset} - real: {hej}");
+
+            if (MyDebug.isDebug)
+            {
+                double hej = (maxColor / phaseLen);
+                Console.WriteLine($"offset: {offset} - real: {hej}");
+                Console.WriteLine($"canvas width: {canvas.Width} og height: {canvas.Height}");
+            }
 
             // x-axis for colors in the canvas
             switch (GetPhase(lineNum))
@@ -81,6 +86,11 @@ namespace LEDControllerWPF
         private int GetPhase(int lineNum)
         {
             double phaseLen = canvas.Width / phases;
+            if (MyDebug.isDebug)
+            {
+                Console.WriteLine($"phase len {phaseLen} on line {lineNum}");
+                Console.WriteLine($"return: {(int) (lineNum / phaseLen)}");
+            }
             return (int) (lineNum / phaseLen);
         } 
 
@@ -89,7 +99,10 @@ namespace LEDControllerWPF
         {
             CalcRGBValues(lineNum);
 
-            //Console.WriteLine($"R:{_r} G:{_g} B:{_b}");
+            if (MyDebug.isDebug)
+            {
+                Console.WriteLine($"R:{_r} G:{_g} B:{_b}");
+            }
 
             Color colorLine = new Color();
             colorLine = Color.FromRgb(_r,_g,_b);
