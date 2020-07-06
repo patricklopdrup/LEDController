@@ -91,6 +91,8 @@
     </ApplicationDefinition>
     <Compile Include="LedSelector.cs" />
     <Compile Include="MyDebug.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RgbConverter.cs" />
     <Compile Include="Settings\ProgramSetting.cs" />
     <Compile Include="Settings\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>

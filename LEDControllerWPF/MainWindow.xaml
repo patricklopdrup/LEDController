@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:LEDControllerWPF"
         mc:Ignorable="d"
         Icon="./Img/256.ico"
-        Title="LED Controller" Height="800" Width="1080" Loaded="Window_Loaded">
+        Title="LED Controller" Height="800" Width="1080" MinHeight="800" MinWidth="1080" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:RgbConverter x:Key="RgbConverter" />
+    </Window.Resources>
     <Grid Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10" />
@@ -48,21 +51,49 @@
                 <Slider Width="200" Height="20" Margin="10" IsMoveToPointEnabled="True" TickFrequency="1" IsSnapToTickEnabled="True" Minimum="0" Maximum="255" x:Name="BSlider"/>
                 <TextBox FontSize="20" Margin="10" Width="40" TextAlignment="Right" Text="{Binding ElementName=BSlider, Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
+
+            <!--Chosen color-->
+            <StackPanel Margin="150,10,150,0">
+                <TextBlock Text="Chosen color" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Height="50">
+                    <!--Bind rgb value from sliders to the background of the textblock. Also using RgbConverter class-->
+                    <TextBlock.Background>
+                        <SolidColorBrush>
+                            <SolidColorBrush.Color>
+                                <MultiBinding Converter="{StaticResource RgbConverter}">
+                                    <Binding Path="Value" ElementName="RSlider" />
+                                    <Binding Path="Value" ElementName="GSlider" />
+                                    <Binding Path="Value" ElementName="BSlider" />
+                                </MultiBinding>
+                            </SolidColorBrush.Color>
+                        </SolidColorBrush>
+                    </TextBlock.Background>
+                </TextBlock>
+            </StackPanel>
+
+            <!--<TextBlock Height="50" Background="{Binding ChosenColor, UpdateSourceTrigger=PropertyChanged}"/>-->
+
         </StackPanel>
 
         <!--Color palette-->
-        <Grid Grid.Column="1" Grid.Row="1" Margin="25" x:Name="Gd">
-            <Border BorderThickness="2" 
-                    Width="514" Height="404" 
-                    VerticalAlignment="Top" HorizontalAlignment="Center" 
-                    BorderBrush="Black" 
-                    x:Name="colorBorder"
-                    Margin="-10">
-                <!--width 510 makes the offset exactly 3-->
-                <Canvas x:Name="ColorPalette" Width="510" MaxWidth="510" MinWidth="510"
-                         Height="400">
-                </Canvas>
-            </Border>
+        <Grid Grid.Column="1" Grid.RowSpan="3" Grid.Row="1" Margin="25" x:Name="Gd">
+            <StackPanel Orientation="Vertical">
+                <Border BorderThickness="2" 
+                        Width="514" Height="404" 
+                        VerticalAlignment="Top" HorizontalAlignment="Center" 
+                        BorderBrush="Black" 
+                        x:Name="colorBorder"
+                        Margin="-10">
+                    <!--width 510 makes the offset exactly 3-->
+                    <Canvas x:Name="ColorPalette" Width="510" MaxWidth="510" MinWidth="510"
+                             Height="400" MouseLeftButtonDown="ColorPalette_MouseLeftButtonDown">
+                    </Canvas>
+                </Border>
+
+                <!--Preview color-->
+                <TextBlock Margin="150,10,150,0" Height="30" Background="{Binding PreviewColor, UpdateSourceTrigger=PropertyChanged}"/>
+                
+            </StackPanel>
         </Grid>
 
         <Button Grid.Column="3" Grid.Row="3" Name="SettingsButton"

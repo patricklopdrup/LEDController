@@ -52,18 +52,14 @@ namespace LEDControllerWPF
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            MyColor color = new MyColor(ColorPalette);
+            MyColor color = new MyColor(ColorPalette, RSlider, GSlider, BSlider);
+            DataContext = color;
 
             if (!_isUsedBefore)
             {
                 SettingsButton_Click(this, new RoutedEventArgs());
                 _isUsedBefore = true;
             }
-        }
-
-        private void ColorPalette_MouseMove(object sender, MouseEventArgs e)
-        {
-            
         }
 
         // Open new window when settings button is clicked
@@ -159,6 +155,11 @@ namespace LEDControllerWPF
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ColorPalette_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
         }
