@@ -6,7 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -24,22 +26,26 @@ namespace LEDControllerWPF
             _canvas = canvas;
 
             CreateCheckBoxes();
-            
         }
-
-        
 
         // Creates checkboxes in a stackpanel
         private void CreateCheckBoxes()
         {
             for (int i = 0; i < _ledNum; i++)
             {
-                _st.Children.Add(new CheckBox
+                _st.Children.Add(new ToggleButton()
                 {
                     Name = "led" + i,
                     ClickMode = ClickMode.Press,
+                    Cursor = Cursors.Hand,
                     VerticalAlignment = VerticalAlignment.Center,
-                    LayoutTransform = new ScaleTransform(0.7, 1.1),
+                    Height = 15,
+                    Width = 10,
+                    //IsEnabled = true,
+                    //IsChecked = true,
+                    //Background = Brushes.Transparent,
+                    Margin = new Thickness(0.2,0,0.2,0)
+                    //LayoutTransform = new ScaleTransform(0.7, 1.1)
                 });
             }
 

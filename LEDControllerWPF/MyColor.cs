@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -21,6 +22,7 @@ namespace LEDControllerWPF
         private byte maxColor = 255;
         private byte _r, _g, _b;
         private Slider _rSlider, _gSlider, _bSlider;
+        private Border _previewColorBlock;
 
         private SolidColorBrush _previewColor;
         private SolidColorBrush _chosenColor;
@@ -44,12 +46,13 @@ namespace LEDControllerWPF
             }
         }
 
-        public MyColor(Canvas canvas, Slider rSlider, Slider gSlider, Slider bSlider)
+        public MyColor(Canvas canvas, Slider rSlider, Slider gSlider, Slider bSlider, Border previewColorBlock)
         {
             this.canvas = canvas;
             _rSlider = rSlider;
             _gSlider = gSlider;
             _bSlider = bSlider;
+            _previewColorBlock = previewColorBlock;
             DrawLines();
         }
 
@@ -122,7 +125,7 @@ namespace LEDControllerWPF
                 Console.WriteLine($"return: {(int) (lineNum / phaseLen)}");
             }
             return (int) (lineNum / phaseLen);
-        } 
+        }
 
         // add a vertical line on the canvas
         private void AddLine(int lineNum)
@@ -149,7 +152,8 @@ namespace LEDControllerWPF
             // Make an onClick listener on the lines
             line.MouseLeftButtonDown += new MouseButtonEventHandler(lineMouseDown);
             line.MouseMove += new MouseEventHandler(lineMouseMove);
-            
+            canvas.LostFocus += new RoutedEventHandler(lostFocus);
+
             LinearGradientBrush linearBrush = new LinearGradientBrush();
             linearBrush.ColorInterpolationMode = ColorInterpolationMode.SRgbLinearInterpolation;
 
@@ -184,6 +188,12 @@ namespace LEDControllerWPF
                 Console.WriteLine($"y-pos:{mouseYPos} and offset:{offset}");
                 Console.WriteLine($"color: {PreviewColor}");
             }
+
+            // Move block of preview color near the mouse
+            int textBlockOffset = 15;
+            _previewColorBlock.RenderTransform = new TranslateTransform(
+                e.GetPosition(canvas).X - (canvas.ActualWidth/2) + textBlockOffset, 
+                e.GetPosition(canvas).Y - canvas.ActualHeight - textBlockOffset);
         }
 
         protected void lineMouseDown(object sender, MouseButtonEventArgs e)
@@ -209,6 +219,12 @@ namespace LEDControllerWPF
                 Console.WriteLine($"y-pos:{mouseYPos} and offset:{offset}");
                 Console.WriteLine($"color: {color}");
             }
+        }
+
+        protected void lostFocus(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Arrow;
+            
         }
 
         // Taken from https://stackoverflow.com/a/9651053/13203546
@@ -242,11 +258,6 @@ namespace LEDControllerWPF
             return color;
         }
 
-        public void GetBitmap()
-        {
-            BitmapSource bitmap = new BitmapImage();
-
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

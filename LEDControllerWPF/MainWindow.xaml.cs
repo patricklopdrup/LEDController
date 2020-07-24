@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -52,7 +53,7 @@ namespace LEDControllerWPF
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            MyColor color = new MyColor(ColorPalette, RSlider, GSlider, BSlider);
+            MyColor color = new MyColor(ColorPalette, RSlider, GSlider, BSlider, PreviewColorBlock);
             DataContext = color;
 
             if (!_isUsedBefore)
@@ -78,7 +79,11 @@ namespace LEDControllerWPF
             {
                 string elementName = mouseWasDownOn.Name;
 
-                CheckBox hej = mouseWasDownOn as CheckBox;
+                ToggleButton hej = mouseWasDownOn as ToggleButton;
+                if (hej.IsChecked == true)
+                {
+                    hej.Background = new SolidColorBrush(Color.FromRgb(255,0,0));
+                }
 
                 if (MyDebug.isDebug)
                 {
