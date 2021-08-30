@@ -14,8 +14,30 @@ using System.Windows.Threading;
 
 namespace LEDControllerWPF
 {
-    class LedSelector
+    // Class so we are able to send which led is clicked on
+    class LedSelectEventArgs : EventArgs
     {
+        public int StartNum { get; set; }
+        public int EndNum { get; set; }
+    }
+
+    // Hold information of the LED(s) that is clicked
+    class LedObject
+    {
+        public int StartNum { get; set; }
+        public int EndNum { get; set; }
+
+        public string GetSequence()
+        {
+            // if more than 1 LED is selected, fx led0 to led7: "0-7"
+            return EndNum == -1 ? StartNum.ToString() : $"{StartNum}-{EndNum}";
+        }
+    }
+
+    class LedSelector
+        {
+        public EventHandler<LedSelectEventArgs> LedClicked;
+
         private StackPanel _st;
         private Canvas _canvas;
         private int _ledNum = 91;
@@ -28,7 +50,7 @@ namespace LEDControllerWPF
             CreateCheckBoxes();
         }
 
-        // Creates checkboxes in a stackpanel
+        {
         private void CreateCheckBoxes()
         {
             for (int i = 0; i < _ledNum; i++)

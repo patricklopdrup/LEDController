@@ -60,7 +60,7 @@ namespace LEDControllerWPF
             _timer.Start();
         }
 
-        // check running status of all the games in out List
+        // check running status of all the games in the List
         public void CheckGames(object sender, EventArgs e)
         {
             foreach (var game in _games)
